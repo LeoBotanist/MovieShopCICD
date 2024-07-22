@@ -1,0 +1,19 @@
+.movie-information{
+    background-color: transparent;
+}
+.movie-info-text{
+    color: white;
+}
+.list-group-flush .list-group-item {
+    border-bottom-color: black;
+}
+.img-in-movie-page {
+    height: 4em;
+    width: auto;
+}
+
+.flex-grow-1 a, .flex-grow-1 p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}

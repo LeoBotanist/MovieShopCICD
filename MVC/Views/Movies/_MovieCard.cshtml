@@ -1,0 +1,8 @@
+@model MovieCardViewModel
+
+<a href="@Url.Action("Details", "movies", new {id = @Model.Id})" class="card h-100 border-2 border-dark" style="aspect-ratio: 1/2;">
+    <img class="card-img-top" src="@Model.PosterUrl" alt="@Model.Title"/>
+    <div class="card-body h-25">
+        <h4 style="min-height: 3em; font-size: 1.25em; line-height: 1.5em;">@Model.Title</h4>
+    </div>
+</a>

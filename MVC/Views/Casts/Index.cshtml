@@ -1,0 +1,57 @@
+@model CastResponseModel
+@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>@Model.Name</title>
+    <link rel="stylesheet" href="~/css/movieDetail.css" asp-append-version="true"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <img src="@Model.ProfilePath" class="img-responsive" width="100%" alt="@Model.Name"/>
+        </div>
+        <div class="col-6 offset-2 d-flex flex-column justify-content-center">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td>@Model.Name</td>
+                </tr>
+                <tr>
+                    <th scope="row">Gender</th>
+                    <td>@(Model.Gender.Equals("1") ? "Female" : "Male")</td>
+                </tr>
+                <tr>
+                    <th scope="row">TmdbUrl</th>
+                    <td><a href="@Model.TmdbUrl">@Model.TmdbUrl</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@if (Model.Movies != null)
+{
+    <p class="fw-bold" style="padding-top: 2em;">Movies: </p>
+
+    <ul class="list-group">
+        @foreach (var movie in Model.Movies)
+        {
+            <div class="list-group-item list-group-item-action d-flex align-items-center">
+                <img src="@movie.PosterUrl" alt="@movie.Title" style="height: 4em; width: auto"/>
+                <a href="@Url.Action("Details", "Movies", new { id = movie.Id })" style="padding-left: 4em;">@movie.Title</a>
+            </div>
+            
+        }
+    </ul>
+}
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+@model MovieCardGenrePageModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>(@Model.GenreName) Movies List</title>
+</head>
+<body>
+
+<div class="container-lg">
+    <div class="row my-5 align-items-start justify-content-center g-5">
+        @foreach (var movie in Model.MovieCardViewModels)
+        {
+            <div class="col-lg-1-5 col-6 col-sm-6 col-md-4 col-lg-3">
+                @await Html.PartialAsync("_MovieCard", movie)
+            </div>
+        }
+    </div>
+</div>
+<nav aria-label="Page Navigation">
+    <ul class="pagination" style="justify-content: center">
+        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Genre", new {pageNumber = Model.PageNumber - 1, pageSize = Model.PageSize, genreId = Model.GenreId, genreName = Model.GenreName})">Previous</a>
+        </li>
+
+        <li class="page-item @(Model.PageNumber == 834 ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Genre", new {pageNumber = Model.PageNumber + 1, pageSize = Model.PageSize, genreId = Model.GenreId, genreName = Model.GenreName})">Next</a>
+        </li>
+    </ul>
+</nav>
+
+</body>
+</html>
