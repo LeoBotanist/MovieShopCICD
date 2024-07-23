@@ -2,10 +2,14 @@
 using ApplicationCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Configuration;
+
 namespace Infrastructure.Data;
 
 public class MovieShopDbContext: DbContext
 {
+    private readonly IConfiguration _configuration;
+    
     public DbSet<Cast> Casts { get; set; }
     public DbSet<Favorite> Favorites { get; set; }
     public DbSet<Genre> Genres { get; set; }
@@ -19,16 +23,16 @@ public class MovieShopDbContext: DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<UserRole> UserRoles { get; set; }
 
-    public MovieShopDbContext(DbContextOptions<MovieShopDbContext> options)
+    public MovieShopDbContext(DbContextOptions<MovieShopDbContext> options, IConfiguration configuration)
         : base(options)
     {
-        
+        this._configuration = configuration;
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(
-            "Server=localhost; Database=MovieShop; User=sa; Password=bigStrongPwd126; TrustServerCertificate=true");
+        string connectionString = _configuration.GetConnectionString("MovieShopDb");
+        optionsBuilder.UseSqlServer(connectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -8,8 +8,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<MovieShopDbContext>(options =>
-    options.UseSqlServer("Server=localhost; Database=MovieShop; User=sa; Password=bigStrongPwd126; TrustServerCertificate=true"));
-
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MovieShopDb")));
 // Add dependencies?
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
